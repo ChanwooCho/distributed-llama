@@ -208,7 +208,8 @@ void* TaskLoop::threadHandler(void* arg) {
 
         const TaskLoopTask* task = &loop->tasks[currentTaskIndex % loop->nTasks];
 
-        task->handler(loop->nThreads, threadIndex, loop->userData);
+        if (task->taskType == 1)
+            task->handler(loop->nThreads, threadIndex, loop->userData);
 
         int currentCount = loop->doneThreadCount.fetch_add(1);
 
