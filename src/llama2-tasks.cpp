@@ -271,9 +271,9 @@ TransformerArch buildLlamaArch(TransformerSpec* spec) {
         // a.I(llamaMergeFfn2, TASK_TYPE_INFERENCE);
         // a.I(llamaNextBlock, TASK_TYPE_INFERENCE);
     }
-    a.I(llamaRmsFinal, TASK_TYPE_INFERENCE);
-    a.I(llamaRmsFinalNorm, TASK_TYPE_INFERENCE);
-    a.I(llamaFinalize, TASK_TYPE_INFERENCE);
+    // a.I(llamaRmsFinal, TASK_TYPE_INFERENCE);
+    // a.I(llamaRmsFinalNorm, TASK_TYPE_INFERENCE);
+    // a.I(llamaFinalize, TASK_TYPE_INFERENCE);
 
     // worker
 
@@ -285,13 +285,13 @@ TransformerArch buildLlamaArch(TransformerSpec* spec) {
         // a.W(llamaQuantizeMultiheadAtt, TASK_TYPE_INFERENCE);
         // a.W(llamaAtt, TASK_TYPE_INFERENCE);
         // a.W(llamaQuantizeAtt, TASK_TYPE_INFERENCE);
-        a.W(llamaSyncAtt, TASK_TYPE_TRANSFER);
+        // a.W(llamaSyncAtt, TASK_TYPE_TRANSFER);
         a.W(llamaSyncFfn, TASK_TYPE_TRANSFER);
         // a.W(llamaFfn0, TASK_TYPE_INFERENCE);
         // a.W(llamaFfn1, TASK_TYPE_INFERENCE);
         // a.W(llamaFfn2, TASK_TYPE_INFERENCE);
         // a.W(llamaQuantizeFfn2, TASK_TYPE_INFERENCE);
-        a.W(llamaSyncFfn2, TASK_TYPE_TRANSFER);
+        // a.W(llamaSyncFfn2, TASK_TYPE_TRANSFER);
         // a.W(llamaNextBlock, TASK_TYPE_INFERENCE);
     }
     return a;
