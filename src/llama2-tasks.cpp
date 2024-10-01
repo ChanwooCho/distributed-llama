@@ -279,20 +279,20 @@ TransformerArch buildLlamaArch(TransformerSpec* spec) {
 
     for (int i = 0; i < spec->nLayers; i++) {
         a.W(llamaSyncRmsAtt, TASK_TYPE_TRANSFER);
-        a.W(llamaQkv, TASK_TYPE_INFERENCE);
-        a.W(llamaRope, TASK_TYPE_INFERENCE);
-        a.W(llamaMultiheadAtt, TASK_TYPE_INFERENCE);
-        a.W(llamaQuantizeMultiheadAtt, TASK_TYPE_INFERENCE);
-        a.W(llamaAtt, TASK_TYPE_INFERENCE);
-        a.W(llamaQuantizeAtt, TASK_TYPE_INFERENCE);
+        // a.W(llamaQkv, TASK_TYPE_INFERENCE);
+        // a.W(llamaRope, TASK_TYPE_INFERENCE);
+        // a.W(llamaMultiheadAtt, TASK_TYPE_INFERENCE);
+        // a.W(llamaQuantizeMultiheadAtt, TASK_TYPE_INFERENCE);
+        // a.W(llamaAtt, TASK_TYPE_INFERENCE);
+        // a.W(llamaQuantizeAtt, TASK_TYPE_INFERENCE);
         a.W(llamaSyncAtt, TASK_TYPE_TRANSFER);
         a.W(llamaSyncFfn, TASK_TYPE_TRANSFER);
-        a.W(llamaFfn0, TASK_TYPE_INFERENCE);
-        a.W(llamaFfn1, TASK_TYPE_INFERENCE);
-        a.W(llamaFfn2, TASK_TYPE_INFERENCE);
-        a.W(llamaQuantizeFfn2, TASK_TYPE_INFERENCE);
+        // a.W(llamaFfn0, TASK_TYPE_INFERENCE);
+        // a.W(llamaFfn1, TASK_TYPE_INFERENCE);
+        // a.W(llamaFfn2, TASK_TYPE_INFERENCE);
+        // a.W(llamaQuantizeFfn2, TASK_TYPE_INFERENCE);
         a.W(llamaSyncFfn2, TASK_TYPE_TRANSFER);
-        a.W(llamaNextBlock, TASK_TYPE_INFERENCE);
+        // a.W(llamaNextBlock, TASK_TYPE_INFERENCE);
     }
     return a;
 }
