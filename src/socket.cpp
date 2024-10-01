@@ -9,6 +9,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <sys/time.h>
 #include "socket.hpp"
 
 #ifdef _WIN32
@@ -26,6 +27,12 @@ typedef SSIZE_T ssize_t;
 
 #define SOCKET_LAST_ERRCODE errno
 #define SOCKET_LAST_ERROR strerror(errno)
+
+unsigned long timeUs() {
+    struct timeval te; 
+    gettimeofday(&te, NULL);
+    return te.tv_sec * 1000000LL + te.tv_usec;
+}
 
 static inline bool isEagainError() {
     #ifdef _WIN32
@@ -224,6 +231,7 @@ void SocketPool::writeMany(unsigned int n, SocketIo* ios) {
         assert(io->socketIndex >= 0 && io->socketIndex < nSockets);
         sentBytes += io->size;
     }
+    unsigned int before = timeUs();
     do {
         isWriting = false;
         for (unsigned int i = 0; i < n; i++) {
@@ -245,6 +253,8 @@ void SocketPool::writeMany(unsigned int n, SocketIo* ios) {
             }
         }
     } while (isWriting);
+    unsigned int after = timeUs();
+    printf("Socket Write Time = %d\n", after-before);
 }
 
 void SocketPool::readMany(unsigned int n, SocketIo* ios) {
@@ -254,6 +264,7 @@ void SocketPool::readMany(unsigned int n, SocketIo* ios) {
         assert(io->socketIndex >= 0 && io->socketIndex < nSockets);
         recvBytes += io->size;
     }
+    unsigned int before = timeUs();
     do {
         isReading = false;
         for (unsigned int i = 0; i < n; i++) {
@@ -275,6 +286,8 @@ void SocketPool::readMany(unsigned int n, SocketIo* ios) {
             }
         }
     } while (isReading);
+    unsigned int after = timeUs();
+    printf("Socket Read Time = %d\n", after-before);
 }
 
 void SocketPool::getStats(size_t* sentBytes, size_t* recvBytes) {
