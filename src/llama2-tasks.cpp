@@ -255,7 +255,7 @@ TransformerArch buildLlamaArch(TransformerSpec* spec) {
         // a.I(llamaQuantizeMultiheadAtt, TASK_TYPE_INFERENCE);
         // a.I(llamaAtt, TASK_TYPE_INFERENCE);
         // a.I(llamaQuantizeAtt, TASK_TYPE_INFERENCE);
-        a.I(llamaSyncAtt, TASK_TYPE_TRANSFER);
+        // a.I(llamaSyncAtt, TASK_TYPE_TRANSFER);
         // a.I(llamaDequantizeAtt, TASK_TYPE_INFERENCE);
         // a.I(llamaMergeAtt, TASK_TYPE_INFERENCE);
         // a.I(llamaRmfFfn, TASK_TYPE_INFERENCE);
@@ -266,7 +266,7 @@ TransformerArch buildLlamaArch(TransformerSpec* spec) {
         // a.I(llamaFfn1, TASK_TYPE_INFERENCE);
         // a.I(llamaFfn2, TASK_TYPE_INFERENCE);
         // a.I(llamaQuantizeFfn2, TASK_TYPE_INFERENCE);
-        a.I(llamaSyncFfn2, TASK_TYPE_TRANSFER);
+        // a.I(llamaSyncFfn2, TASK_TYPE_TRANSFER);
         // a.I(llamaDequantizeFfn2, TASK_TYPE_INFERENCE);
         // a.I(llamaMergeFfn2, TASK_TYPE_INFERENCE);
         // a.I(llamaNextBlock, TASK_TYPE_INFERENCE);
