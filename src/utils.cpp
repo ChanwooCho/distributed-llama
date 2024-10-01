@@ -213,18 +213,13 @@ void* TaskLoop::threadHandler(void* arg) {
 
         int currentCount = loop->doneThreadCount.fetch_add(1);
 
-        if (currentCount == loop->nThreads - 1) {
-            unsigned int currentTime = timeMs();
-            loop->executionTime[task->taskType] += currentTime - loop->lastTime;
-            loop->lastTime = currentTime;
+        unsigned int currentTime = timeMs();
+        loop->executionTime[task->taskType] += currentTime - loop->lastTime;
+        loop->lastTime = currentTime;
 
-            loop->doneThreadCount.store(0);
-            loop->currentTaskIndex.fetch_add(1);
-        } else {
-            while (loop->currentTaskIndex.load() == currentTaskIndex) {
-                // NOP
-            }
-        }
+        loop->doneThreadCount.store(0);
+        loop->currentTaskIndex.fetch_add(1);
+ 
     }
 
     // printf("@ Thread %d stopped at step %d\n", threadIndex, unsigned(loop->currentTaskIndex));
