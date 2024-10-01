@@ -211,14 +211,14 @@ void* TaskLoop::threadHandler(void* arg) {
 
         task->handler(loop->nThreads, threadIndex, loop->userData);
 
-        int currentCount = loop->doneThreadCount.fetch_add(1);
+        // int currentCount = loop->doneThreadCount.fetch_add(1);
 
         // unsigned int currentTime = timeMs();
         // loop->executionTime[task->taskType] += currentTime - loop->lastTime;
         loop->executionTime[task->taskType] += 0;
         // loop->lastTime = currentTime;
 
-        loop->doneThreadCount.store(0);
+        // loop->doneThreadCount.store(0);
         loop->currentTaskIndex.fetch_add(1);
  
     }
