@@ -58,7 +58,6 @@ void syncUnitBuffer(unsigned int nThreads, unsigned int threadIndex, Transformer
             }
             ctx->socketPool->writeMany(nSockets, ios);
         }
-        unsigned int nSockets = ctx->socketPool->nSockets / nThreads + (ctx->socketPool->nSockets % nThreads > threadIndex ? 1 : 0);
         if (nSockets > 0) {
             SocketIo ios[nSockets];
             for (int i = 0; i < nSockets; i++) {
