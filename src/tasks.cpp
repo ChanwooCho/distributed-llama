@@ -63,6 +63,8 @@ void syncUnitBuffer(unsigned int nThreads, unsigned int threadIndex, Transformer
 
         // worker
         ctx->socket->read(buffer, bufferBytes);
+        void* buffer = ctx->transformer->buffer->getSliced(bufferIndex, ctx->transformer->sliceIndex);
+        ctx->socket->write(buffer, bufferBytes);
     }
 }
 
