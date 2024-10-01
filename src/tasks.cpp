@@ -58,6 +58,18 @@ void syncUnitBuffer(unsigned int nThreads, unsigned int threadIndex, Transformer
             }
             ctx->socketPool->writeMany(nSockets, ios);
         }
+        unsigned int nSockets = ctx->socketPool->nSockets / nThreads + (ctx->socketPool->nSockets % nThreads > threadIndex ? 1 : 0);
+        if (nSockets > 0) {
+            SocketIo ios[nSockets];
+            for (int i = 0; i < nSockets; i++) {
+                int socketIndex = threadIndex + i * nThreads;
+                uint8_t workerSliceIndex = socketIndex + 1;
+                ios[i].socketIndex = socketIndex;
+                ios[i].data = ctx->transformer->buffer->getSliced(bufferIndex, workerSliceIndex);
+                ios[i].size = bufferBytes;
+            }
+            ctx->socketPool->readMany(nSockets, ios);
+        }
     } else if (ctx->socket != NULL) {
         if (threadIndex != 0) return;
 
