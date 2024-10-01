@@ -216,7 +216,6 @@ void* TaskLoop::threadHandler(void* arg) {
         if (currentCount == loop->nThreads - 1) {
             unsigned int currentTime = timeMs();
             loop->executionTime[task->taskType] += currentTime - loop->lastTime;
-            printf("currentTaskIndex = %3d, task type = %d, currentCount = %d, time=%d ms\n", currentTaskIndex, task->taskType, currentCount, currentTime - loop->lastTime);
             loop->lastTime = currentTime;
 
             loop->doneThreadCount.store(0);
